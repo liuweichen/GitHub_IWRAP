@@ -33,7 +33,7 @@ public class FOne {
 	}
 	
 	public float getFOneValue() {
-		dist.setWidthIntegration(channel.getWidthObstacle());
+		dist.setWidthIntegration(channel.getWidthOrDistanceObstacle());
 		float tempIntegration = dist.getIntegrationbyRectangle();
 		return (float)(CausasionFactor.agroundFactor*shipOne.getQuantityofShip()*tempIntegration);
 	}

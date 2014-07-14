@@ -82,6 +82,7 @@ public class Distribution {
 		//standard normal distribution标准正态分布
 		float standardNormalDistribution =(float) (Math.sqrt(12.0/n)*(temp - n / 2));
 		//normal distribution by mean value and variance任意的正态分布 
+		//System.out.println((float)(meanValue + Math.sqrt(variance) * standardNormalDistribution));
 		return (float)(meanValue + Math.sqrt(variance) * standardNormalDistribution);
 	}
 	

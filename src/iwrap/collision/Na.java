@@ -25,19 +25,18 @@ public class Na {
 	public float getNaofHeadOnorTakeOver() {
 		es = Ship.getCounterSituation(shipOne, shipTwo);
 		pg = new PG(shipOne,shipTwo);
-
+		//System.out.println("PG"+pg.getPG());
 		return channel.getLength() * pg.getPG() * Ship.getRelativeSpeed(shipOne, shipTwo, es)				
 				* (shipOne.getQuantityofShip() * shipTwo.getQuantityofShip())
-				/(shipOne.getSpeed() * shipTwo.getSpeed()) ;
+				/(shipOne.getSpeed() * shipTwo.getSpeed());
 	}
 	
 	public float getNaofCross() {
 		es = Ship.getCounterSituation(shipOne, shipTwo);
 		float angleDifference = Ship.getAngleDifference(shipOne, shipTwo);
 		float relativeSpeed = Ship.getRelativeSpeed(shipOne, shipTwo, es);
-		
 		double d1 =(shipOne.getLength() * shipTwo.getSpeed() + shipTwo.getLength() * shipOne.getSpeed())
-				/relativeSpeed * Math.sin(angleDifference*2*Math.PI/360);
+				* Math.sin(angleDifference*2*Math.PI/360)/relativeSpeed;
 		double d2 = shipTwo.getWidth() * 
 				Math.sqrt(1-Math.pow(Math.sin(angleDifference*2*Math.PI/360*shipOne.getSpeed()/relativeSpeed), 2));
 		double d3 = shipOne.getWidth() * 

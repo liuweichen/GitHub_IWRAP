@@ -20,7 +20,7 @@ public class FTwo {
 	}
 	
 	public float getFTwoValue() {
-		dist.setWidthIntegration(bendingChannel.getWidthObstacle());
+		dist.setWidthIntegration(bendingChannel.getWidthOrDistanceObstacle());
 		float tempIntegration = dist.getIntegrationbyRectangle();
 		double tempForgetCheckPosition = 
 			Sailor.getProbabilityForgetCheckPosition(bendingChannel.getDistanceToObstacle());

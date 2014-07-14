@@ -6,12 +6,12 @@ public class Ship {
 	float width;//The width of the ship船宽
 	float course;//The course of the ship航向
 	float speed;//The speed of the ship航速
-	String type;//The class of the ship船舶种类
-	int quantityofShip;//The quantity of the ship through船舶流量
+	ShipKind type;//The class of the ship船舶种类
+	float quantityofShip;//The quantity of the ship through船舶流量
 	Distribution dist;//The distribution of the kind of ship交通流分布
 	
 	public Ship(float length, float width, float course, float speed,
-			String type, int quantityofShip, Distribution dist) {
+			ShipKind type, float quantityofShip, Distribution dist) {
 		super();
 		this.length = length;
 		this.width = width;
@@ -46,13 +46,13 @@ public class Ship {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}	
-	public String getType() {
+	public ShipKind getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(ShipKind type) {
 		this.type = type;
 	}
-	public int getQuantityofShip() {
+	public float getQuantityofShip() {
 		return quantityofShip;
 	}
 	public void setQuantityofShip(int quantityofShip) {
@@ -88,8 +88,9 @@ public class Ship {
 			if(shipOne.course >= shipTwo.course)
 				angle = shipOne.course - shipTwo.course;
 			else angle = shipTwo.course - shipOne.course;
+			//System.out.println("Angel"+shipOne.speed);
 			return (float)Math.sqrt(shipOne.speed * shipOne.speed + shipTwo.speed * shipTwo.speed
-					- 2 * shipOne.speed * shipTwo.speed * Math.cos(angle) );
+					- 2 * shipOne.speed * shipTwo.speed * Math.cos(angle*2*Math.PI/360) );
 		default: return 0;
 		}
 	}
