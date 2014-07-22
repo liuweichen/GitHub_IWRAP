@@ -56,8 +56,15 @@ public class Distribution {
 		this.widthIntegration = widthIntegration;
 	}
 
+	@Override
+	public String toString() {
+		return "Distribution [meanValue=" + meanValue + ", variance="
+				+ variance + ", min=" + min + ", max=" + max
+				+ ", widthIntegration=" + widthIntegration + ", dk=" + dk + "]";
+	}
+
 	//get the distribution 得到分布函数值
-	public float getDistribution() {
+	public double getDistribution() {
 		switch(dk) {
 		case uniformDistribution:
 			return uniformDistribution();
@@ -73,7 +80,7 @@ public class Distribution {
 	}
 	
 	//normal distribution正态分布
-	public float normalDistribution() {
+	public double normalDistribution() {
 		int n = 120;
 		float temp = 0;
 		for(int i = 0; i < n; i++) {
@@ -83,7 +90,7 @@ public class Distribution {
 		float standardNormalDistribution =(float) (Math.sqrt(12.0/n)*(temp - n / 2));
 		//normal distribution by mean value and variance任意的正态分布 
 		//System.out.println((float)(meanValue + Math.sqrt(variance) * standardNormalDistribution));
-		return (float)(meanValue + Math.sqrt(variance) * standardNormalDistribution);
+		return meanValue + Math.sqrt(variance) * standardNormalDistribution;
 	}
 	
 	//get the area for integration by reverse since we can not get the Max or Min of the number
@@ -100,7 +107,7 @@ public class Distribution {
 			widthIntegrationMax = widthIntegration;
 			widthIntegrationMin = meanValue;
 		}
-		float step = (widthIntegrationMax - widthIntegrationMin) / n;//The step of integration步长
+		double step = (widthIntegrationMax - widthIntegrationMin) / n;//The step of integration步长
 		for(int i = 0; i < n;i++) {
 			areaIntegration += this.getNoramlDistribution(widthIntegrationMin+i*step);
 		}
@@ -108,7 +115,7 @@ public class Distribution {
 	}
 	
 	//get the normal distribution value by x  通过X得到正态分布函数的值
-	public double getNoramlDistribution(float x) {
+	public double getNoramlDistribution(double x) {
 		double firstPart =1.0d/Math.sqrt(Math.PI * variance * 2);
 		double secondPart = -(x-meanValue)*(x-meanValue)/(2*variance);
 		return firstPart*Math.exp(secondPart);

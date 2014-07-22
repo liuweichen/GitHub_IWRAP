@@ -26,9 +26,8 @@ public class PG {
 		
 		es = Ship.getCounterSituation(shipOne, shipTwo);
 		if(es == EncounterSituation.cross) return 0;
-		System.out.println("SpeedRR="+Ship.getRelativeSpeed(shipOne, shipTwo, es));
 		//get PG value得到PG值,i最小为100000不然不稳定
-		for(int i = 0; i < 100000; i++) {
+		for(int i = 0; i < 10000000; i++) {
 			if(Math.abs(shipOne.getDist().getDistribution() - shipTwo.getDist().getDistribution())
 					<= (shipOne.getWidth()+shipTwo.getWidth())/2)
 			dangerCount++;
@@ -40,7 +39,8 @@ public class PG {
 //				
 //			}
 		}
-		//System.out.println("Class-PG="+dangerCount/10000.0f);
-		return dangerCount/100000.0f;
+	//	System.out.println("PG="+dangerCount/100000.0f);
+		return dangerCount/10000000.0f;
+	//	return 0.00237f;
 	}
 }

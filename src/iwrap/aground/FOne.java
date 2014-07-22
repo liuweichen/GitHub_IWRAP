@@ -7,6 +7,12 @@ public class FOne {
 	Ship shipOne;//The kind of the ship船舶种类
 	Channel channel;//The channel of the case航道信息
 	
+	public FOne(Distribution dist, Ship shipOne, Channel channel) {
+		this.dist = dist;
+		this.shipOne = shipOne;
+		this.channel = channel;
+	}
+	
 	public Distribution getDist() {
 		return dist;
 	}

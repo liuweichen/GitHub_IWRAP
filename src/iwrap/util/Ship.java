@@ -88,7 +88,6 @@ public class Ship {
 			if(shipOne.course >= shipTwo.course)
 				angle = shipOne.course - shipTwo.course;
 			else angle = shipTwo.course - shipOne.course;
-			//System.out.println("Angel"+shipOne.speed);
 			return (float)Math.sqrt(shipOne.speed * shipOne.speed + shipTwo.speed * shipTwo.speed
 					- 2 * shipOne.speed * shipTwo.speed * Math.cos(angle*2*Math.PI/360) );
 		default: return 0;

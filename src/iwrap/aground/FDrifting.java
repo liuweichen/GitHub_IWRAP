@@ -11,6 +11,12 @@ public class FDrifting {
 	Ship shipOne;//The kind of the ship船舶种类
 	Channel channel;//The channel of the case航道信息
 	
+	public FDrifting(Distribution dist, Ship shipOne, Channel channel) {
+		this.dist = dist;
+		this.shipOne = shipOne;
+		this.channel = channel;
+	}
+	
 	public Distribution getDist() {
 		return dist;
 	}
@@ -36,9 +42,9 @@ public class FDrifting {
 				+ channel + "]";
 	}
 	//Get the probability of the ship in the danger 得到船舶在危险搁浅区域的概率
-	public float getIntegrationValue() {
+	public double getIntegrationValue() {
 		dist.setWidthIntegration(channel.getWidthOrDistanceObstacle());
-		float tempIntegration = dist.getIntegrationbyRectangle();
+		double tempIntegration = dist.getIntegrationbyRectangle();
 		return tempIntegration;
 	}
 	//Get the probability of ship out of control 船舶失控的概率
@@ -49,9 +55,10 @@ public class FDrifting {
 					*channel.getLength()/shipOne.getSpeed();
 			
 		} else {
-			tempIndex = (float)CausasionFactor.frequencyOutofControl
+			tempIndex = -(float)CausasionFactor.frequencyOutofControl
 					*channel.getLength()/shipOne.getSpeed();
 		}
+		//System.out.println(1.0f - Math.exp(tempIndex));
 		return (float)(1.0f - Math.exp(tempIndex));
 	}
 	//Get the integral of ship in no repair by speed drift from 1 to 3 求漂移速度的积分
@@ -68,8 +75,25 @@ public class FDrifting {
 	}
 	//The function of ship in no repair 船舶没有修好的概率函数
 	public double functionInNoRepair(float speedDrift) {
-		float timeGround = channel.getWidthOrDistanceObstacle()/speedDrift;
+		double timeGround = channel.getWidthOrDistanceObstacle()/speedDrift;
 		return Math.exp(-1.05*Math.pow(timeGround, 0.9)) * 0.5;
+	}
+	//Get the integration by rectangle method, drift speed from 1 to 3
+	public double getDriftSpeedIntegration() {
+		int n = 10000;
+		double tempIntegration = 0d;
+		for(int i = 0;i < n; i++) {
+			tempIntegration =+this.functionInNoRepair(1.0f + 2f/n * i);
+		}
+		return tempIntegration * 2f/n;
+	}
+	//Return the Frequency of Drifting result
+	public float getFDriftingValue() {
+		double tempShipInDanger = this.getIntegrationValue();
+		double tempOutOfControl = this.getProbabilityOutofControl();
+		double tempDriftSpeedIntegration = this.getDriftSpeedIntegration();
+		//System.out.println(this.getProbabilityOutofControl());
+		return (float)(tempShipInDanger*tempOutOfControl*channel.getLength()*tempDriftSpeedIntegration);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package iwrap.util;
 
 public class BendingChannel extends Channel {
+	//The distance to the ground point in bending channel弯角处距礁石（搁浅点）的距离
 	public float distanceToObstacle;
 	
 	public BendingChannel(float length, float width, float widthObstacle) {
