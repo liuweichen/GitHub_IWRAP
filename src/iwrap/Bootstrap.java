@@ -29,18 +29,17 @@ public class Bootstrap {
 //		}
 		
 		//Test ground demo
-		Distribution distOne = new Distribution(3.0f*100,150*150,0.0f*100,12.0f*100,0.0f,DistributionKind.normalDistribution);
-		Ship shipOne = new Ship(214f,33.2f,0f,14.7f*1852/3600.0f,ShipKind.tanker,10000f/(360*24*3600),distOne);
-		BendingChannel bendingChannel = new BendingChannel(35046f,1200f,100f,1000f);
+		Distribution distOne = new Distribution(3.0f*100,150*150,0.0f*100,12.0f*100,0.0f,100.0f,DistributionKind.normalDistribution);
+		Ship shipOne = new Ship(214f,33.2f,0f,14.7f,ShipKind.tanker,10000f,distOne);
+		Channel channel = new Channel(35046f,1200f,1000f,0f,10000f);
 		
-		FOne fOne = new FOne(distOne,shipOne,bendingChannel);
-		FTwo fTwo = new FTwo(distOne,shipOne,bendingChannel);
-		FDrifting fDrifting = new FDrifting(distOne,shipOne,bendingChannel);
+		FOne fOne = new FOne(distOne,shipOne,channel);
+		FTwo fTwo = new FTwo(distOne,shipOne,channel);
+		FDrifting fDrifting = new FDrifting(distOne,shipOne,channel);
 		float tempDrifting = 0f;
 		tempDrifting = fOne.getFOneValue()+fTwo.getFTwoValue()+fDrifting.getFDriftingValue();
 		System.out.println("fOne.getFOneValue()= "+fOne.getFOneValue());
 		System.out.println("fTwo.getFTwoValue()="+fTwo.getFTwoValue());
-		System.out.println("fDrifting.getFDriftingValue()"+fDrifting.getFDriftingValue());
 		System.out.println("DriftingValue = "+tempDrifting);
 	}
 

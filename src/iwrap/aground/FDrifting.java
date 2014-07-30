@@ -43,7 +43,8 @@ public class FDrifting {
 	}
 	//Get the probability of the ship in the danger 得到船舶在危险搁浅区域的概率
 	public double getIntegrationValue() {
-		dist.setWidthIntegration(channel.getWidthOrDistanceObstacle());
+		dist.setMinIntegration(channel.getMinObstacle());
+		dist.setMaxIntegration(channel.getMaxObstacle());
 		double tempIntegration = dist.getIntegrationbyRectangle();
 		return tempIntegration;
 	}
@@ -53,12 +54,10 @@ public class FDrifting {
 		if(shipOne.getType()==ShipKind.passengerShip) {
 			tempIndex = -(float)CausasionFactor.frequencyOutofControlDefault
 					*channel.getLength()/shipOne.getSpeed();
-			
 		} else {
 			tempIndex = -(float)CausasionFactor.frequencyOutofControl
 					*channel.getLength()/shipOne.getSpeed();
 		}
-		//System.out.println(1.0f - Math.exp(tempIndex));
 		return (float)(1.0f - Math.exp(tempIndex));
 	}
 	//Get the integral of ship in no repair by speed drift from 1 to 3 求漂移速度的积分
@@ -75,7 +74,7 @@ public class FDrifting {
 	}
 	//The function of ship in no repair 船舶没有修好的概率函数
 	public double functionInNoRepair(float speedDrift) {
-		double timeGround = channel.getWidthOrDistanceObstacle()/speedDrift;
+		double timeGround = channel.getDistanceObstacle()/speedDrift;
 		return Math.exp(-1.05*Math.pow(timeGround, 0.9)) * 0.5;
 	}
 	//Get the integration by rectangle method, drift speed from 1 to 3
@@ -92,7 +91,7 @@ public class FDrifting {
 		double tempShipInDanger = this.getIntegrationValue();
 		double tempOutOfControl = this.getProbabilityOutofControl();
 		double tempDriftSpeedIntegration = this.getDriftSpeedIntegration();
-		//System.out.println(this.getProbabilityOutofControl());
+		//System.out.println(tempDriftSpeedIntegration);
 		return (float)(tempShipInDanger*tempOutOfControl*channel.getLength()*tempDriftSpeedIntegration);
 	}
 	
