@@ -124,6 +124,7 @@ public class Distribution {
 		for(int i = 0; i < n;i++) {
 			areaIntegration += this.getNoramlDistribution(minIntegration+i*step);
 		}
+		//System.out.println(areaIntegration*step);
 		return (float)(areaIntegration*step);
 	}
 	
