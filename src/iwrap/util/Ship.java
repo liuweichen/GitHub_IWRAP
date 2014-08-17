@@ -2,17 +2,16 @@ package iwrap.util;
 
 
 public class Ship {
+	ShipKind type;//The class of the ship船舶种类
 	float length;//The length of the ship船长
 	float width;//The width of the ship船宽
 	float course;//The course of the ship航向
 	float speed;//The speed of the ship航速
-	ShipKind type;//The class of the ship船舶种类
 	float quantityofShip;//The quantity of the ship through船舶流量
 	Distribution dist;//The distribution of the kind of ship交通流分布
 	
-	public Ship(float length, float width, float course, float speed,
-			ShipKind type, float quantityofShip, Distribution dist) {
-		super();
+	public Ship(ShipKind type, float length, float width, float course, float speed,
+			float quantityofShip, Distribution dist) {
 		this.length = length;
 		this.width = width;
 		this.course = course;
@@ -67,10 +66,9 @@ public class Ship {
 
 	@Override
 	public String toString() {
-		return "Ship [length=" + length + ", width=" + width + ", course="
-				+ course + ", speed=" + speed + ", type=" + type
-				+ ", quantityofShip=" + quantityofShip + ", dist=" + dist
-				+ "]";
+		return "Ship [type=" + type + ", length=" + length + ", width=" + width
+				+ ", course=" + course + ", speed=" + speed
+				+ ", quantityofShip=" + quantityofShip + ", dist=" + dist + "]";
 	}
 	
 	//get the relative speed of the two ships求两船相对速度

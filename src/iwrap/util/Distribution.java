@@ -1,17 +1,16 @@
 package iwrap.util;
 
 public class Distribution {
+	DistributionKind dk;//The kind of the distribution分布函数种类
 	float meanValue;//The average of the values平均值
 	float variance;//The variance of the values方差
 	float min;//The minimum of the values最小值
 	float max;//The maximum of the values最大值
 	float minIntegration;//The min of the integration积分起点
 	float maxIntegration;//The max of the integration积分终点
-	DistributionKind dk;//The kind of the distribution分布函数种类
 	
-	public Distribution(float meanValue, float variance, float min, float max,
-			float minIntegration, float maxIntegration, DistributionKind dk) {
-		super();
+	public Distribution(DistributionKind dk,float meanValue, float variance, float min, float max,
+			float minIntegration, float maxIntegration ) {
 		this.meanValue = meanValue;
 		this.variance = variance;
 		this.min = min;
@@ -78,10 +77,10 @@ public class Distribution {
 
 	@Override
 	public String toString() {
-		return "Distribution [meanValue=" + meanValue + ", variance="
-				+ variance + ", min=" + min + ", max=" + max
+		return "Distribution [dk=" + dk + ", meanValue=" + meanValue
+				+ ", variance=" + variance + ", min=" + min + ", max=" + max
 				+ ", minIntegration=" + minIntegration + ", maxIntegration="
-				+ maxIntegration + ", dk=" + dk + "]";
+				+ maxIntegration + "]";
 	}
 
 	//get the distribution 得到分布函数值

@@ -3,7 +3,7 @@ package iwrap.util;
 public class Channel {
 	float length;//The length of the channel航道长度
 	float width;//The width of the channel航道宽度
-	float distanceObstacle = 0f;//The width or the distance of the obstacle障碍物者距离
+	float distanceObstacle = 0f;//The width or the distance of the obstacle障碍物者前方距离
 	float minObstacle = 0f;//The min of the obstacle障碍物横向宽度最小值
 	float maxObstacle = 0f;//The max the distance of the obstacle障碍物横向宽度最大值
 	

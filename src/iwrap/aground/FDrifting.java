@@ -2,27 +2,19 @@ package iwrap.aground;
 
 import iwrap.util.CausasionFactor;
 import iwrap.util.Channel;
-import iwrap.util.Distribution;
 import iwrap.util.Ship;
 import iwrap.util.ShipKind;
 
 public class FDrifting {
-	Distribution dist;//The distribution of the ships分布函数
 	Ship shipOne;//The kind of the ship船舶种类
 	Channel channel;//The channel of the case航道信息
 	
-	public FDrifting(Distribution dist, Ship shipOne, Channel channel) {
-		this.dist = dist;
+	public FDrifting(Ship shipOne, Channel channel) {
 		this.shipOne = shipOne;
 		this.channel = channel;
 	}
 	
-	public Distribution getDist() {
-		return dist;
-	}
-	public void setDist(Distribution dist) {
-		this.dist = dist;
-	}
+
 	public Ship getShipOne() {
 		return shipOne;
 	}
@@ -38,14 +30,13 @@ public class FDrifting {
 	
 	@Override
 	public String toString() {
-		return "FOne [dist=" + dist + ", shipOne=" + shipOne + ", channel="
-				+ channel + "]";
+		return "FDrifting [shipOne=" + shipOne + ", channel=" + channel + "]";
 	}
 	//Get the probability of the ship in the danger 得到船舶在危险搁浅区域的概率
 	public double getIntegrationValue() {
-		dist.setMinIntegration(channel.getMinObstacle());
-		dist.setMaxIntegration(channel.getMaxObstacle());
-		double tempIntegration = dist.getIntegrationbyRectangle();
+		shipOne.getDist().setMinIntegration(channel.getMinObstacle());
+		shipOne.getDist().setMaxIntegration(channel.getMaxObstacle());
+		double tempIntegration = shipOne.getDist().getIntegrationbyRectangle();
 		return tempIntegration;
 	}
 	//Get the probability of ship out of control 船舶失控的概率
@@ -86,7 +77,7 @@ public class FDrifting {
 		for(int i = 0;i < n; i++) {
 			tempIntegration =+this.functionInNoRepair(1.0f + step * i);
 		}
-		System.out.println(tempIntegration+"tempIntegration");
+		//System.out.println(tempIntegration+"tempIntegration");
 		return tempIntegration * step;
 	}
 	//Return the Frequency of Drifting result
